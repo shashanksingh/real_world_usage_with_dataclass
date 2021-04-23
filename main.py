@@ -36,7 +36,7 @@ def create():
             google_play_90_off_giftcard
         ]
     )
-
+    return shashank_customer
 
 
 # Press the green button in the gutter to run the script.
