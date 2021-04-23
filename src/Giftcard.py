@@ -18,7 +18,7 @@ class Giftcard:
             raise InvalidDiscount("Discount must be withing 0 and 100")
 
     def __calculate_discounted_price(self) -> Decimal:
-        return ((Decimal(100.00) - self.discount_percentage)  / Decimal(100.00) ) * self.face_value
+        return ((Decimal(100.00) - self.discount_percentage) / Decimal(100.00)) * self.face_value
 
     def update_discount_percentage(self, discount_percentage: Decimal):
         self.discount_percentage = discount_percentage
