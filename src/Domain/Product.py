@@ -1,5 +1,4 @@
 import uuid
-
 import dataclasses
 from typing import Optional
 from pydantic.dataclasses import dataclass

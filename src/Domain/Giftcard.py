@@ -3,7 +3,6 @@ from __future__ import annotations
 import dataclasses
 import uuid
 from typing import Optional
-
 from pydantic.dataclasses import dataclass
 from decimal import Decimal
 from src.Exceptions.InvalidDiscount import InvalidDiscount
