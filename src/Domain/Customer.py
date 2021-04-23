@@ -1,5 +1,5 @@
 from pydantic.dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 from src.Domain.Basket import Basket
 from src.Domain.Giftcard import Giftcard
 import dataclasses
@@ -7,7 +7,7 @@ import uuid
 
 @dataclass
 class Customer:
-    uuid: str = dataclasses.field(default_factory=lambda: str(uuid.uuid4()))
+    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     basket: Basket = dataclasses.field(default_factory=lambda: Basket())
     name: str = None
 

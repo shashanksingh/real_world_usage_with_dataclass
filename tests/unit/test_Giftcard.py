@@ -18,7 +18,7 @@ class TestGiftcard(TestCase):
 
     def test_update_discount_percentage_with_out_of_bound_value(self):
         with self.assertRaises(InvalidDiscount):
-            giftcard = Giftcard() \
+            Giftcard()\
                 .with_product(Mock()) \
                 .with_discount_percentage(Decimal(999.00)) \
                 .with_face_value(Decimal(10.00)) \
