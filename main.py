@@ -5,8 +5,8 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 from src import Constants
-from src.DTO.CustomerRequestDTO import CustomerRequestDTO
-from src.DTO.CustomerResponseDTO import CustomerResponseDTO
+from src.dto.CustomerRequestDTO import CustomerRequestDTO
+from src.dto.CustomerResponseDTO import CustomerResponseDTO
 from src.Domain.Customer import Customer
 from src.Exceptions.CustomerNotFound import CustomerNotFound
 from src.Exceptions.InvalidDiscount import InvalidDiscount
@@ -22,10 +22,11 @@ async def get_giftcards():
 
 
 @app.post("/customer")
-async def create_customer(customer_data : CustomerRequestDTO):
-    customer = Customer(name=CustomerRequestDTO.name)
+async def create_customer(customer_request: CustomerRequestDTO):
+    print(customer_request)
+    customer = Customer(name=customer_request.name)
     Constants.ALL_CUSTOMERS[customer.uuid] = customer
-    return CustomerResponseDTO(name = customer.name, uuid = customer.uuid)
+    return CustomerResponseDTO(name=customer.name, uuid=customer.uuid)
 
 
 @app.put("/customer/{uuid}/giftcards")
