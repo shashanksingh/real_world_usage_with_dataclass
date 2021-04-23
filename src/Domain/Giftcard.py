@@ -3,7 +3,7 @@ from __future__ import annotations
 from pydantic.dataclasses import dataclass
 from decimal import Decimal
 from src.Exceptions.InvalidDiscount import InvalidDiscount
-from src.Product import Product
+from src.Domain.Product import Product
 
 
 @dataclass

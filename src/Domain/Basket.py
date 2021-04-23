@@ -1,7 +1,7 @@
 from pydantic.dataclasses import dataclass
 from decimal import Decimal
 from typing import List
-from src.Giftcard import Giftcard
+from src.Domain.Giftcard import Giftcard
 import dataclasses
 
 

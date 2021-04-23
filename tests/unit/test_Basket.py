@@ -2,10 +2,10 @@ from decimal import Decimal
 from unittest import TestCase
 from unittest.mock import Mock
 
-from src.Basket import Basket
+from src.Domain.Basket import Basket
 from unittest.mock import MagicMock
 
-from src.Giftcard import Giftcard
+from src.Domain.Giftcard import Giftcard
 
 
 class TestBasket(TestCase):

@@ -3,7 +3,7 @@ from unittest import TestCase
 from unittest.mock import Mock
 
 from src.Exceptions.InvalidDiscount import InvalidDiscount
-from src.Giftcard import Giftcard
+from src.Domain.Giftcard import Giftcard
 
 
 class TestGiftcard(TestCase):

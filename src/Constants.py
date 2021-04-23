@@ -1,10 +1,9 @@
 from collections import defaultdict
 from decimal import Decimal
-from typing import List
 
-from src.Customer import Customer
-from src.Giftcard import Giftcard
-from src.Product import Product
+from src.Domain.Customer import Customer
+from src.Domain.Giftcard import Giftcard
+from src.Domain.Product import Product
 
 tesco_product = Product(name="Tesco")
 google_play_product = Product(name="Google Play")

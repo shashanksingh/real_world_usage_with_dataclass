@@ -1,7 +1,7 @@
 from pydantic.dataclasses import dataclass
 from typing import List
-from src.Basket import Basket
-from src.Giftcard import Giftcard
+from src.Domain.Basket import Basket
+from src.Domain.Giftcard import Giftcard
 import dataclasses
 import uuid
 

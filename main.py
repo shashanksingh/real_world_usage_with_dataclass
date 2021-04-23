@@ -4,10 +4,10 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 from src import Constants
-from src.Customer import Customer
+from src.Domain.Customer import Customer
 from src.Exceptions.CustomerNotFound import CustomerNotFound
 from src.Exceptions.InvalidDiscount import InvalidDiscount
-from src.Giftcard import Giftcard
+from src.Domain.Giftcard import Giftcard
 from fastapi import FastAPI
 
 app = FastAPI()
