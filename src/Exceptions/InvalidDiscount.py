@@ -1,0 +1,2 @@
+class InvalidDiscount(Exception):
+    pass
