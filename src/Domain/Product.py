@@ -7,5 +7,5 @@ from pydantic.dataclasses import dataclass
 
 @dataclass
 class Product:
-    # uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     name: str
+    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))

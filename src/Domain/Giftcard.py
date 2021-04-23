@@ -12,11 +12,11 @@ from src.Domain.Product import Product
 
 @dataclass
 class Giftcard:
-    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     product: Product = None
     face_value: Decimal = Decimal(0.0)
     discount_percentage: Decimal = Decimal(0.0)
     discounted_price: Decimal = Decimal(0.0)
+    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
 
     def __discount_percentage_must_be_withing_zero_and_100(self):
         if self.discount_percentage > 100 or self.discount_percentage < 0:

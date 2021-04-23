@@ -8,8 +8,8 @@ import dataclasses
 
 @dataclass
 class Basket:
-    # uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     giftcards: List[Giftcard] = dataclasses.field(default_factory=lambda: [])
+    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
 
     def add_giftcards(self, giftcards: List[Giftcard]):
         for giftcard in giftcards:
