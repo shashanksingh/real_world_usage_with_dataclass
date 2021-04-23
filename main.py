@@ -1,8 +1,12 @@
 from typing import List
 
+from starlette.requests import Request
+from starlette.responses import JSONResponse
+from http import HTTPStatus
 from src import Constants
 from src.Customer import Customer
 from src.Exceptions.CustomerNotFound import CustomerNotFound
+from src.Exceptions.InvalidDiscount import InvalidDiscount
 from src.Giftcard import Giftcard
 from fastapi import FastAPI
 
@@ -28,3 +32,18 @@ def add_giftcard_to_customer(uuid: int, giftcards: List[Giftcard]):
         raise CustomerNotFound()
     return customer
 
+
+@app.exception_handler(InvalidDiscount)
+async def unicorn_exception_handler(request: Request, exc: InvalidDiscount):
+    return JSONResponse(
+        status_code=HTTPStatus.BAD_REQUEST,
+        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+    )
+
+
+@app.exception_handler(CustomerNotFound)
+async def unicorn_exception_handler(request: Request, exc: CustomerNotFound):
+    return JSONResponse(
+        status_code=HTTPStatus.NOT_FOUND,
+        content={"message": f"Oops! {exc.name} did something. Customer Not Found"},
+    )
