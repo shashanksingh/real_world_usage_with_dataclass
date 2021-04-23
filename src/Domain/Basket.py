@@ -1,15 +1,14 @@
 import uuid
-
 from pydantic.dataclasses import dataclass
 from decimal import Decimal
-from typing import List
+from typing import List, Optional
 from src.Domain.Giftcard import Giftcard
 import dataclasses
 
 
 @dataclass
 class Basket:
-    # uuid: str = dataclasses.field(default_factory=lambda: str(uuid.uuid4()))
+    # uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     giftcards: List[Giftcard] = dataclasses.field(default_factory=lambda: [])
 
     def add_giftcards(self, giftcards: List[Giftcard]):

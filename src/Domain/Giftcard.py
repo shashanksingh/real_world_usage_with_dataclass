@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import uuid
+from typing import Optional
 
 from pydantic.dataclasses import dataclass
 from decimal import Decimal
@@ -11,7 +12,7 @@ from src.Domain.Product import Product
 
 @dataclass
 class Giftcard:
-    # uuid: str = dataclasses.field(default_factory=lambda: str(uuid.uuid4()))
+    uuid: Optional[str] = dataclasses.field(default_factory=lambda: str(uuid.uuid1()))
     product: Product = None
     face_value: Decimal = Decimal(0.0)
     discount_percentage: Decimal = Decimal(0.0)

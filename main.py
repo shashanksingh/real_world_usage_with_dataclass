@@ -1,9 +1,12 @@
 from typing import List
 
+from pydantic.types import UUID
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 from http import HTTPStatus
 from src import Constants
+from src.DTO.CustomerRequestDTO import CustomerRequestDTO
+from src.DTO.CustomerResponseDTO import CustomerResponseDTO
 from src.Domain.Customer import Customer
 from src.Exceptions.CustomerNotFound import CustomerNotFound
 from src.Exceptions.InvalidDiscount import InvalidDiscount
@@ -14,22 +17,21 @@ app = FastAPI()
 
 
 @app.get("/giftcards")
-def get_giftcards():
+async def get_giftcards():
     return Constants.ALL_GIFTCARDS
 
 
 @app.post("/customer")
-def create_customer(name: str):
-    return Customer(name=name)
+async def create_customer(customer_data : CustomerRequestDTO):
+    customer = Customer(name=CustomerRequestDTO.name)
+    Constants.ALL_CUSTOMERS[customer.uuid] = customer
+    return CustomerResponseDTO(name = customer.name, uuid = customer.uuid)
 
 
 @app.put("/customer/{uuid}/giftcards")
-def add_giftcard_to_customer(uuid: int, giftcards: List[Giftcard]):
+async def add_giftcard_to_customer(uuid: UUID, giftcards: List[Giftcard]):
     customer = Constants.ALL_CUSTOMERS.get(uuid)
-    try:
-        customer.add_gift_card(giftcards)
-    except Exception:
-        raise CustomerNotFound()
+    customer.add_gift_card(giftcards)
     return customer
 
 
@@ -37,7 +39,7 @@ def add_giftcard_to_customer(uuid: int, giftcards: List[Giftcard]):
 async def unicorn_exception_handler(request: Request, exc: InvalidDiscount):
     return JSONResponse(
         status_code=HTTPStatus.BAD_REQUEST,
-        content={"message": f"Oops! {exc.name} did something. There goes a rainbow..."},
+        content={"message": f"Oops! {exc} did something. There goes a rainbow..."},
     )
 
 
@@ -45,5 +47,5 @@ async def unicorn_exception_handler(request: Request, exc: InvalidDiscount):
 async def unicorn_exception_handler(request: Request, exc: CustomerNotFound):
     return JSONResponse(
         status_code=HTTPStatus.NOT_FOUND,
-        content={"message": f"Oops! {exc.name} did something. Customer Not Found"},
+        content={"message": f"Oops! {exc} did something. Customer Not Found"},
     )
