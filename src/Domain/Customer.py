@@ -7,9 +7,9 @@ import uuid
 
 @dataclass
 class Customer:
+    uuid: str = dataclasses.field(default_factory=lambda: str(uuid.uuid4()))
     basket: Basket = dataclasses.field(default_factory=lambda: Basket())
     name: str = None
-    uuid: str = dataclasses.field(default_factory=lambda: uuid.uuid4())
 
     def add_gift_card(self, giftcards: List[Giftcard]):
         self.basket.add_giftcards(giftcards)

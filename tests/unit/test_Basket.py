@@ -1,9 +1,8 @@
 from decimal import Decimal
 from unittest import TestCase
-from unittest.mock import Mock
+from unittest.mock import Mock, MagicMock
 
 from src.Domain.Basket import Basket
-from unittest.mock import MagicMock
 
 from src.Domain.Giftcard import Giftcard
 
