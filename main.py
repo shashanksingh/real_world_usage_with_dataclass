@@ -2,6 +2,7 @@ from typing import List
 
 from src import Constants
 from src.Customer import Customer
+from src.Exceptions.CustomerNotFound import CustomerNotFound
 from src.Giftcard import Giftcard
 from fastapi import FastAPI
 
@@ -23,7 +24,7 @@ def add_giftcard_to_customer(uuid: int, giftcards: List[Giftcard]):
     customer = Constants.ALL_CUSTOMERS.get(uuid)
     try:
         customer.add_gift_card(giftcards)
-    except  Exception ex:
-        return ex.to_s
+    except Exception:
+        raise CustomerNotFound()
     return customer
 
