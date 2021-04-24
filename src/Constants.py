@@ -22,4 +22,4 @@ google_play_90_off_giftcard = Giftcard() \
 
 ALL_GIFTCARDS = [tesco_10_off_giftcard, google_play_90_off_giftcard]
 ALL_CUSTOMERS = defaultdict(Customer)
-ALL_GIFTCARDS_DICT = {giftcard.uuid: giftcard for giftcard in ALL_GIFTCARDS}
+ALL_GIFTCARDS_DICT = {giftcard.product.uuid: giftcard for giftcard in ALL_GIFTCARDS}
