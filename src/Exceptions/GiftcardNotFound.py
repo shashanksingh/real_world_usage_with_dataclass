@@ -1,0 +1,2 @@
+class GiftcardNotFound(Exception):
+    pass

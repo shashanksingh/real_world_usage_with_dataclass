@@ -1,5 +1,3 @@
-from typing import List
-
 from pydantic import ValidationError
 from pydantic.types import UUID
 from starlette.requests import Request
@@ -12,8 +10,10 @@ from src.Dto.CustomerCreateRequestDTO import CustomerRequestDTO
 from src.Dto.CustomerCreateResponseDTO import CustomerResponseDTO
 from src.Domain.Customer import Customer
 from src.Exceptions.CustomerNotFound import CustomerNotFound
+from src.Exceptions.GiftcardNotFound import GiftcardNotFound
 from src.Exceptions.InvalidDiscount import InvalidDiscount
 from fastapi import FastAPI
+import uvicorn
 
 app = FastAPI()
 
@@ -32,12 +32,13 @@ async def create_customer(customer_request: CustomerRequestDTO):
 
 @app.put("/customer/{customer_uuid}/giftcards")
 async def add_giftcard_to_customer(customer_uuid: UUID, giftcard_uuids: CustomerAddGiftCardRequestDTO):
-    giftcards = [Constants.ALL_GIFTCARDS_DICT.get(uuid) for uuid in giftcard_uuids.giftcard_uuids]
-    try:
-        customer = Constants.ALL_CUSTOMERS[customer_uuid]
-        customer.add_gift_card(giftcards)
-    except KeyError or AttributeError:
-        raise CustomerNotFound()
+    giftcards = [Constants.ALL_GIFTCARDS_DICT.get(str(uuid)) for uuid in giftcard_uuids.giftcard_uuids]
+    customer = Constants.ALL_CUSTOMERS.get(customer_uuid)
+    if not all(giftcards):
+        raise GiftcardNotFound
+    elif not customer:
+        raise CustomerNotFound
+    customer.add_gift_card(giftcards)
 
     return CustomerAddGiftCardResponseDTO(giftcards=giftcards, customer=customer)
 
@@ -64,3 +65,7 @@ async def unicorn_exception_handler(request: Request, exc: ValidationError):
         status_code=HTTPStatus.BAD_REQUEST,
         content={"message": f"Validation Error : {exc}"},
     )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

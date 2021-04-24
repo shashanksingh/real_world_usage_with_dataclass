@@ -2,4 +2,4 @@ unit-test:
 	 python -m unittest tests/unit
 
 run:
-	uvicorn main:app --reload
+	./venv/bin/uvicorn main:app --reload --
