@@ -13,7 +13,6 @@ from src.Exceptions.CustomerNotFound import CustomerNotFound
 from src.Exceptions.GiftcardNotFound import GiftcardNotFound
 from src.Exceptions.InvalidDiscount import InvalidDiscount
 from fastapi import FastAPI
-import uvicorn
 
 app = FastAPI()
 
@@ -59,6 +58,14 @@ async def unicorn_exception_handler(request: Request, exc: CustomerNotFound):
     )
 
 
+@app.exception_handler(GiftcardNotFound)
+async def unicorn_exception_handler(request: Request, exc: GiftcardNotFound):
+    return JSONResponse(
+        status_code=HTTPStatus.NOT_FOUND,
+        content={"message": f"Oops! {exc} did something. Giftcard Not Found"},
+    )
+
+
 @app.exception_handler(ValidationError)
 async def unicorn_exception_handler(request: Request, exc: ValidationError):
     return JSONResponse(
@@ -66,6 +73,3 @@ async def unicorn_exception_handler(request: Request, exc: ValidationError):
         content={"message": f"Validation Error : {exc}"},
     )
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
